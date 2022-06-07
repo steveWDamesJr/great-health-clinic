@@ -11,6 +11,14 @@ CREATE TABLE IF NOT EXISTS medical_histories (
   patient_id INT NOT NULL,
   status VARCHAR(255) NOT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT patients_id_fk FOREIGN KEY(id) REFERENCES patients(id),
-  CONSTRAINT patients_id_fk FOREIGN KEY(patient_id) REFERENCES prescribed_treatments(id)
+--   CONSTRAINT patients_id_fk FOREIGN KEY(id) REFERENCES patients(id),
+--   CONSTRAINT patients_id_fk FOREIGN KEY(patient_id) REFERENCES prescribed_treatments(id)
+);
+
+CREATE TABLE IF NOT EXISTS treatments(
+  id INT GENERATED ALWAYS AS IDENTITY,
+  treatments_id INT,
+  type VARCHAR(255),
+  name VARCHAR(255),
+  -- CONSTRAINT patients_id_fk FOREIGN KEY(id) REFERENCES patients(id),
 );
