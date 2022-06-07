@@ -12,7 +12,6 @@ CREATE TABLE IF NOT EXISTS medical_histories (
   status VARCHAR(255) NOT NULL,
   PRIMARY KEY (id),
   CONSTRAINT patients_id_fk FOREIGN KEY(id) REFERENCES patients(id),
---   CONSTRAINT patients_id_fk FOREIGN KEY(patient_id) REFERENCES prescribed_treatments(id)
 );
 
 CREATE TABLE IF NOT EXISTS treatments(
@@ -20,11 +19,13 @@ CREATE TABLE IF NOT EXISTS treatments(
   treatments_id INT,
   type VARCHAR(255),
   name VARCHAR(255),
-  -- CONSTRAINT patients_id_fk FOREIGN KEY(id) REFERENCES prescribed_treatments(patient_id)
-);
+-- ALTER TABLE treatments ADD CONSTRAINT treatments_patient_id_fk FOREIGN KEY(treatments_id) REFERENCES prescribed_treatments(treatments_id););
 
 CREATE TABLE IF NOT EXISTS prescribed_treatments(
-  treatments_id INT,
-  patient_id INT,
-  PRIMARY KEY(treatments_id, patient_id)
+  treatments_id INT UNIQUE,
+  patient_id INT UNIQUE,
+  PRIMARY KEY(treatments_id, patient_id),
 );
+
+-- Update made the patient_id a foreign key referencing the prescribed_treatments table
+ALTER TABLE medical_histories ADD CONSTRAINT medical_patient_id_fk FOREIGN KEY(patient_id) REFERENCES prescribed_treatments(patient_id);
