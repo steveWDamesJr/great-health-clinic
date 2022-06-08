@@ -22,10 +22,11 @@ CREATE TABLE IF NOT EXISTS treatments(
 -- ALTER TABLE treatments ADD CONSTRAINT treatments_patient_id_fk FOREIGN KEY(treatments_id) REFERENCES prescribed_treatments(treatments_id);
 );
 
-CREATE TABLE IF NOT EXISTS prescribed_treatments(
-  treatments_id INT UNIQUE,
-  patient_id INT UNIQUE,
-  PRIMARY KEY(treatments_id, patient_id)
+CREATE TABLE IF NOT EXISTS prescribed_treatments (
+  id INT GENERATED ALWAYS AS IDENTITY UNIQUE,
+  treatments_id INT,
+  medical_history INT,
+  PRIMARY KEY (treatments_id, medical_history)
 );
 
 -- Update made the patient_id a foreign key referencing the prescribed_treatments table
