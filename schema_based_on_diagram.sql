@@ -29,3 +29,26 @@ CREATE TABLE IF NOT EXISTS prescribed_treatments(
 
 -- Update made the patient_id a foreign key referencing the prescribed_treatments table
 ALTER TABLE medical_histories ADD CONSTRAINT medical_patient_id_fk FOREIGN KEY(patient_id) REFERENCES prescribed_treatments(patient_id);
+
+CREATE TABLE IF NOT EXISTS invoice_items (
+  id INT GENERATED ALWAYS AS IDENTITY,
+  unit_price DECIMAL NOT NULL,
+  quantity INT NOT NULL,
+  total_price DECIMAL NOT NULL,
+  invoice_id INT NOT NULL,
+  treatment_id INT NOT NULL,
+  PRIMARY KEY (id),
+);
+
+CREATE TABLE IF NOT EXISTS invoices (
+  id INT GENERATED ALWAYS AS IDENTITY,
+  total_amount DECIMAL NOT NULL,
+  generated_at timestamp NOT NULL,
+  payed_at timestamp NOT NULL,
+  medical_history_id INT NOT NULL,
+  PRIMARY KEY (id,generated_at,payed_at),
+)
+
+ALTER TABLE invoice_items ADD CONSTRAINT invoice_id_fk FOREIGN KEY(id) REFERENCES invoice (id);
+
+ALTER TABLE invoices ADD CONSTRAINT invoices_medical_histories_fk FOREIGN KEY(id) REFERENCES medical_histories(id);
