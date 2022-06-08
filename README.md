@@ -6,6 +6,8 @@ This is a database for a fictional clinic where the doctor/owner wanted a way to
 
 Enjoy!
 
+## ERB Diagram
+![screenshot](./images/Great-health-clinic-ERB.png)
 
 ## Getting Started
 
